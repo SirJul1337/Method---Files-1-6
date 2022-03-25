@@ -13,57 +13,48 @@ namespace Method___Files
             Console.ForegroundColor = ConsoleColor.Cyan;
             string file = @".\StarWars.txt";
             string path = @".\";
-            string newFolder = @".\Droids";
-            string deleteFolder = @".\Droids";
-            string deleteFile = @".\StarWars.txt";
-            string searchPatteren = "*.jpg";
-            SearchOption searchOption = SearchOption.TopDirectoryOnly;
-            int menu = 0;
-            Console.WriteLine
-            (
-                "============================================\n" +
-                "                H1 Queue Operation Menu     \n" +
-                "============================================\n"+
-                "1. Add File \n2. Delete file \n3. Display files\n4. Add folder \n5. Search for file in folder \n6. Exit\n"+
-                "\nEnter your choice"
+            string folder = @".\Droids";
 
-            );
-            menu = int.Parse(Console.ReadLine());
-            switch (menu)
-            {
-                case 1:
-                    Console.WriteLine("File "+file+" Has been created");
-                    CreateFile(file);
-                    break;
-                case 2:
-                    DeleteFile(file);
-                    break;
-                case 3:
-                    string getFiles=GetFiles(newFolder, searchPatteren, searchOption);
-                    Console.WriteLine(getFiles);
-                    break;
-                case 4:
-                    CreateFolder(newFolder);
-                    break;
-                case 5:
-                    break;
-                case 6:
-                    break;
 
-            }
-            //Writetofile(file);
-            //string content = ReadFile(file);
-            //Console.WriteLine(content);
-            //DeleteFolder(deleteFolder);
+            //Opgave 1
+            Console.WriteLine("Opgave 1 \n");
+            Writetofile(file);
+            Console.WriteLine(file + " Has been created");
+
+            //Opgave 2
+            Console.WriteLine("\nOpgave 2 \n");
+            string content = ReadFile(file);
+         
+            Console.WriteLine("Read "+content+ " From");
+
+
+            //Opgave 3
+            Console.WriteLine("\nOpgave 3 \n");
+            DeleteFile(file);
+            Console.WriteLine(file + " Has been deleted");
+
+
+            //Opgave 4
+            Console.WriteLine("\nOpgave 4 \n");
+            CreateFolder(folder);
+            Console.WriteLine(folder +" Has been created");
+
+            //Opgave 5
+            Console.WriteLine("\nOpgave 5 \n");
+            DeleteFolder(folder);
+            Console.WriteLine(folder+ " Has been deleted");
+
+
+            //Opgave 6
+            Console.WriteLine("\nOpgave 6 \n");
+            GetFiles(path);
+
+
+
             Console.ReadLine();
         }
         public static void Writetofile(string file)
         {
-            using (StreamWriter sw = new StreamWriter(
-                new FileStream(file, FileMode.Create)))
-            {
-                sw.Write("");
-            }
             File.WriteAllText(file, "Han shot first");
         }
 
@@ -72,32 +63,17 @@ namespace Method___Files
             string content = File.ReadAllText(file);
             return content;
         }
-        public static void CreateFile(string file)
-        {
-            File.Delete(file);
 
-        }
         public static void DeleteFile(string file)
         {
             File.Delete(file);
         }
-        //public static void GetFiles(string path)
-        //{
-        //    foreach(string file in Directory.GetFiles(path))
-        //    {
-        //        Console.WriteLine(file);
-        //    }
-        //}
-        public static string GetFiles(string path, string searchPatteren, SearchOption searchOption)
+        public static void GetFiles(string path)
         {
-            string output = "";
-            string [] files = Directory.GetFiles(path, "*.txt", searchOption);
-            for (int i = 0; i < files.Length; i++)
+            foreach(string file in Directory.GetFiles(path))
             {
-                Console.WriteLine(files[i]);
-                output += files[i]+"\n";
+               Console.WriteLine(file);
             }
-            return output;
         }
         public static void CreateFolder(string folderPath)
         {
